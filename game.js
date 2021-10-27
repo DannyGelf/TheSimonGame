@@ -2,7 +2,7 @@ let buttonColors = ["red", "blue", "green", "yellow"];
 let userClickedPattern = [];
 let gamePattern = [];
 let level = 0;
-let game = false;
+let gameOn = false;
 let firstGame = true;
 
 function nextSequence() {
@@ -74,19 +74,24 @@ function checkAnswer(currentLevel) {
     playSound("wrong");
     animateGameOver();
     $("h1").text("Game Over, Press Any Key to Restart");
-    game = false
+    gameOn = false
     startOver();
   }
 
   function startOver() {
+  
     $(document).keypress(function (event) {
+      if (gameOn === false) {
       userClickedPattern = [];
       gamePattern = [];
       level = 0;
       firstGame = false;
       nextSequence();
-      game = true
+      gameOn = true
       $("#level-title").text("Level " + level);
+     }
     });
+    
+ 
   }
 }
